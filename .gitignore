@@ -1,0 +1,129 @@
+# -----------------------
+# C++ build artifacts
+# -----------------------
+*.obj
+*.o
+*.lo
+*.la
+*.libs
+*.dll
+*.so
+*.so.*
+*.dylib
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+.vs/
+
+# -----------------------
+# Debug / Release files
+# -----------------------
+*.pdb
+*.idb
+*.ilk
+*.dbg
+*.dSYM/
+*.su
+*.ncb
+*.sdf
+*.opendb
+*.VC.db
+
+# -----------------------
+# Static / Dynamic libs
+# -----------------------
+*.lib
+*.a
+
+# -----------------------
+# Build folders
+# -----------------------
+/build/
+/bin/
+/lib/
+/dist/
+/Debug/
+/Release/
+/out/
+**/cmake-build-*/
+**/CMakeFiles/
+!/build/*.csv
+
+# -----------------------
+# CMake generated files
+# -----------------------
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+*.cmake
+*.ninja
+*.check_cache
+*.make
+*.d
+
+# -----------------------
+# IDE / Editor files
+# -----------------------
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# CLion / JetBrains
+.idea/
+
+# Visual Studio
+*.sln.docstates
+*.user
+*.userosscache
+*.suo
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+
+# Xcode
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata/
+DerivedData/
+
+# -----------------------
+# OS files
+# -----------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------
+# Misc
+# -----------------------
+*.json
+*.bin
+*.ddi
+*.modmap
+*.manifest
+*.rc
+*.res
+*.yaml
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.yaml
+*.ninja
+*.bin
+*.bin
+*.ninja_deps
+*.ninja_log
+*.log
+
+# CLion / CMake build directories
+**/cmake-build-debug/
+**/cmake-build-release/
