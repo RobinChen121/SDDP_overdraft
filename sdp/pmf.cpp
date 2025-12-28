@@ -64,3 +64,42 @@ std::vector<std::vector<std::array<double, 2>>> get_pmf_poisson(const std::vecto
     }
     return pmf;
 }
+
+std::vector<std::vector<std::array<double, 3>>>
+get_pmf_poisson_multi(const std::vector<double> &demands1, const std::vector<double> &demands2,
+                      const double quantile) {
+    const auto T = demands1.size();
+    std::vector<int> support_lb1(T);
+    std::vector<int> support_ub1(T);
+    std::vector<int> support_lb2(T);
+    std::vector<int> support_ub2(T);
+    for (size_t i = 0; i < T; ++i) {
+        support_ub1[i] = poisson_quantile(quantile, demands1[i]);
+        support_lb1[i] = poisson_quantile(1 - quantile, demands1[i]);
+        support_ub2[i] = poisson_quantile(quantile, demands2[i]);
+        support_lb2[i] = poisson_quantile(1 - quantile, demands2[i]);
+    }
+    std::vector pmf(T, std::vector<std::array<double, 3>>());
+    for (size_t t = 0; t < T; ++t) {
+        const auto demandLength1 = support_ub1[t] - support_lb1[t] + 1;
+        const auto demandLength2 = support_ub2[t] - support_lb2[t] + 1;
+        const auto demand_length = demandLength1 * demandLength2;
+        pmf[t].resize(demand_length);
+        int index = 0;
+        for (int i = 0; i < demandLength1; ++i) {
+            for (int j = 0; j < demandLength2; ++j) {
+                pmf[t][index][0] = support_lb1[t] + i;
+                pmf[t][index][1] = support_lb2[t] + j;
+                const int demand1 = static_cast<int>(pmf[t][index][0]);
+                const int demand2 = static_cast<int>(pmf[t][index][1]);
+                const double prob1 =
+                        poisson_pmf(demand1, static_cast<int>(demands1[t])) / (2 * quantile - 1);
+                const double prob2 =
+                        poisson_pmf(demand2, static_cast<int>(demands2[t])) / (2 * quantile - 1);
+                pmf[t][index][2] = prob1 * prob2;
+                index += 1;
+            }
+        }
+    }
+    return pmf;
+}

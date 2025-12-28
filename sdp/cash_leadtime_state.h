@@ -23,9 +23,9 @@ public:
         period(period), ini_inventory(ini_inventory), ini_cash(ini_cash), q_pre(q_pre) {};
 
     int get_period() const { return period; }
-    double get_inventory() const { return ini_inventory; }
-    double get_cash() const { return ini_cash; }
-    double get_pre() const { return q_pre; }
+    double get_ini_inventory() const { return ini_inventory; }
+    double get_ini_cash() const { return ini_cash; }
+    double get_q_pre() const { return q_pre; }
 
     // for ordered map
     bool operator==(const CashLeadtimeState &other) const {
@@ -42,9 +42,10 @@ struct std::hash<CashLeadtimeState> {
     std::size_t operator()(const CashLeadtimeState &s) const noexcept {
         std::size_t seed = 0;
         boost::hash_combine(seed, s.get_period());
-        boost::hash_combine(seed, s.get_inventory());
-        boost::hash_combine(seed, s.get_cash());
-        boost::hash_combine(seed, s.get_pre());
+        boost::hash_combine(seed, s.get_ini_inventory());
+        boost::hash_combine(seed, s.get_ini_cash());
+        boost::hash_combine(seed, s.get_q_pre());
+        return seed;
     }
 };
 

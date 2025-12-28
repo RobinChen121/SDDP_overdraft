@@ -11,7 +11,9 @@ else ()
 endif ()
 
 add_executable(${PROJECT_NAME}
-        sdp/single_product.cpp
+        #        sdp/single_product_sdp_testing.cpp
+        sdp/two_product_sdp.cpp
+        #        sdp/single_product_sdp.cpp
         sdp/cash_leadtime_state.h
         sdp/pmf.cpp
         sdp/pmf.h
