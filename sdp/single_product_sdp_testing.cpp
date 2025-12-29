@@ -5,16 +5,12 @@
  *
  *
  */
-#include <fstream>
+
 #include <iostream>
 #include <vector>
 #include "single_product_sdp.h"
+#include "../common.h"
 
-void append_head_csv(const std::string &file_name, const std::string &head) {
-    std::ofstream file(file_name, std::ios::app);
-    file << head;
-    file.close();
-}
 
 int main() {
     const std::vector<std::vector<double>> demands_all = {
@@ -26,11 +22,10 @@ int main() {
     const std::vector<double> overhead_costs_all = {25.0, 50.0};
     const std::vector<double> prices_all = {5, 10};
 
-
-    const std::string file_name = "sdp_testing.csv";
+    const std::string file_name = "../tests_results/sdp_single_prodcut_testing.csv";
     const std::string head =
             "demand pattern, interest rate, overhead, price, final value, time, Q\n";
-    append_head_csv(file_name, head);
+    append_csv_head(file_name, head);
 
     for (int i = 0; i < demands_all.size(); i++) {
         for (int m = 0; m < overdraft_interests.size(); m++) {
@@ -51,7 +46,7 @@ int main() {
                     std::vector<double> arr = {
                             static_cast<double>(i), interest,     overhead, price,
                             final_value[0],         time.count(), Q};
-                    append_head_csv(file_name, head);
+                    append_csv_row(file_name, head);
                     std::cout << "**************************************************" << std::endl;
                     std::cout << "running time is " << time.count() << 's' << std::endl;
                     std::cout << "Final expected cash increment is " << final_value[0] << std::endl;
