@@ -130,5 +130,7 @@ std::vector<std::pair<T1, T2>> cartesian_product(const std::vector<T1> &a,
     return result;
 }
 
+double compute_ub_sigma(const std::vector<double> &ubs, double avg_ub);
+
 
 #endif // COMMON_H

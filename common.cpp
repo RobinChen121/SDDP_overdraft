@@ -77,3 +77,13 @@ DoubleIStatus checkDoubleIStatus(const double end_inventory1, const double end_i
     const auto I_status2 = end_inventory2 > 0 ? IStatus::POSITIVE : IStatus::NEGATIVE;
     return {I_status1, I_status2};
 }
+
+double compute_ub_sigma(const std::vector<double> &ubs, double avg_ub) {
+    const int K = ubs.size();
+    double sigma_square = 0.0;
+    for (int i = 0; i < K; i++) {
+        sigma_square += pow(ubs[i] - avg_ub, 2);
+    }
+    sigma_square /= (K - 1);
+    return std::sqrt(sigma_square);
+}

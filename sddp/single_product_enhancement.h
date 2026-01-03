@@ -1,7 +1,7 @@
 /*
  * Created by Zhen Chen on 2025/12/29.
  * Email: chen.zhen5526@gmail.com
- * Description: 
+ * Description:
  *
  *
  */
@@ -37,14 +37,14 @@ public:
     SingleProduct() {};
     SingleProduct(const std::vector<double> &mean_demands, const double price, const double r1,
                   const double overhead_cost, const int sample_num, const int forward_num,
-                  const int iter_num)
-        : mean_demands(mean_demands), r1(r1), sample_num(sample_num), forward_num(forward_num),
-          iter_num(iter_num) {
+                  const int iter_num) :
+        mean_demands(mean_demands), r1(r1), sample_num(sample_num), forward_num(forward_num),
+        iter_num(iter_num) {
         prices = std::vector(T, price);
         overhead_costs = std::vector(T, overhead_cost);
     };
 
-    [[nodiscard]] std::array<double, 2> solve() const;
+    [[nodiscard]] std::array<double, 4> solve() const;
 };
 
-#endif //SINGLE_PRODUCT_ENHANCEMENT_H
+#endif // SINGLE_PRODUCT_ENHANCEMENT_H
