@@ -267,15 +267,15 @@ std::array<double, 2> SingleProduct::solve() const {
             }
         }
         for (size_t t = T; t > 0; t--) {
-            // de set lb and up for some variables
-            I[t - 1].set(GRB_DoubleAttr_LB, 0.0);
-            I[t - 1].set(GRB_DoubleAttr_UB, GRB_INFINITY);
-            B[t - 1].set(GRB_DoubleAttr_LB, 0.0);
-            B[t - 1].set(GRB_DoubleAttr_UB, GRB_INFINITY);
-            if (t < T) {
-                cash[t - 1].set(GRB_DoubleAttr_LB, -GRB_INFINITY);
-                cash[t - 1].set(GRB_DoubleAttr_UB, GRB_INFINITY);
-            }
+//            // set lb and up for some variables, not useful
+//            I[t - 1].set(GRB_DoubleAttr_LB, 0.0);
+//            I[t - 1].set(GRB_DoubleAttr_UB, GRB_INFINITY);
+//            B[t - 1].set(GRB_DoubleAttr_LB, 0.0);
+//            B[t - 1].set(GRB_DoubleAttr_UB, GRB_INFINITY);
+//            if (t < T) {
+//                cash[t - 1].set(GRB_DoubleAttr_LB, -GRB_INFINITY);
+//                cash[t - 1].set(GRB_DoubleAttr_UB, GRB_INFINITY);
+//            }
 
             IStatus status_last_stage;
             PairStatus status;

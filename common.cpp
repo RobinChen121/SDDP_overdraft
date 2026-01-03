@@ -56,3 +56,24 @@ PairStatus check_pair_status(const double end_inventory, const double end_cash,
     }
     return {I_status, cash_status};
 }
+
+TripleStatus checkTripleStatus(const double end_inventory1, const double end_inventory2,
+                               const double end_cash, const double overdraft_limit) {
+    const auto I_status1 = end_inventory1 > 0 ? IStatus::POSITIVE : IStatus::NEGATIVE;
+    const auto I_status2 = end_inventory2 > 0 ? IStatus::POSITIVE : IStatus::NEGATIVE;
+    CashStatus cash_status;
+    if (end_cash > 0) {
+        cash_status = CashStatus::ATW0;
+    } else if (end_cash < -overdraft_limit) {
+        cash_status = CashStatus::ATW2;
+    } else {
+        cash_status = CashStatus::ATW1;
+    }
+    return {I_status1, I_status2, cash_status};
+}
+
+DoubleIStatus checkDoubleIStatus(const double end_inventory1, const double end_inventory2) {
+    const auto I_status1 = end_inventory1 > 0 ? IStatus::POSITIVE : IStatus::NEGATIVE;
+    const auto I_status2 = end_inventory2 > 0 ? IStatus::POSITIVE : IStatus::NEGATIVE;
+    return {I_status1, I_status2};
+}

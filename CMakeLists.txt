@@ -11,14 +11,16 @@ else ()
 endif ()
 
 add_executable(${PROJECT_NAME}
-        #        sdp/single_product_sdp_testing.cpp
+        #                sdp/single_product_sdp_testing.cpp
         #        sdp/two_product_sdp.cpp
         #        #        sdp/single_product_sdp.cpp
         #        sdp/cash_leadtime_state.h
 
         sdp/pmf.cpp
 
-        sddp/single_product_testing.cpp
+        #        sddp/double_product_testing.cpp
+        #        sddp/double_product.cpp
+        sddp/single_product_testing_iteration_num.cpp
         sddp/sampling.cpp
 
         common.cpp

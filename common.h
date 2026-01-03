@@ -82,12 +82,53 @@ struct TripleStatus {
 
 template<>
 struct std::hash<PairStatus> {
-    std::size_t operator()(const PairStatus &p) const {
+    std::size_t operator()(const PairStatus &p) const noexcept {
         const size_t first_hash = std::hash<IStatus>{}(p.first);
         const size_t second_hash = std::hash<CashStatus>{}(p.second);
         return first_hash ^ (second_hash << 1);
     }
 };
 
+template<>
+struct std::hash<TripleStatus> {
+    std::size_t operator()(const TripleStatus &t) const noexcept {
+        std::size_t seed = 0;
+        boost::hash_combine(seed, t.I_status1);
+        boost::hash_combine(seed, t.I_status2);
+        boost::hash_combine(seed, t.cash_status);
+        return seed;
+    }
+};
+
+template<>
+struct std::hash<DoubleIStatus> {
+    size_t operator()(const DoubleIStatus &p) const {
+        // 哈希计算：使用组合哈希
+        const size_t first_hash = hash<int>()(static_cast<int>(p.first));
+        const size_t second_hash = hash<int>()(static_cast<int>(p.second));
+        return first_hash ^ (second_hash << 1); // 使用异或和位移合并哈希值
+    }
+};
+
+
 PairStatus check_pair_status(double end_inventory, double end_cash, double overdraft_limit);
+TripleStatus checkTripleStatus(double end_inventory1, double end_inventory2, double end_cash,
+                               double overdraft_limit);
+DoubleIStatus checkDoubleIStatus(double end_inventory1, double end_inventory2);
+
+
+template<typename T1, typename T2>
+std::vector<std::pair<T1, T2>> cartesian_product(const std::vector<T1> &a,
+                                                 const std::vector<T2> &b) {
+    std::vector<std::pair<T1, T2>> result;
+
+    for (const auto &i: a) {
+        for (const auto &j: b) {
+            result.emplace_back(i, j);
+        }
+    }
+    return result;
+}
+
+
 #endif // COMMON_H
