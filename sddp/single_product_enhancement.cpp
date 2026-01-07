@@ -339,8 +339,8 @@ std::array<double, 4> SingleProduct::solve() const {
         }
         double avg_ub = std::accumulate(ubs.begin(), ubs.end(), 0.0) / forward_num;
         double sigma = compute_ub_sigma(ubs, avg_ub);
-        double confidence_ub1 = avg_ub - 1.96 * sigma / std::sqrt(sigma);
-        double confidence_ub2 = avg_ub + 1.96 * sigma / std::sqrt(sigma);
+        double confidence_ub1 = avg_ub - 1.96 * sigma / std::sqrt(forward_num);
+        double confidence_ub2 = avg_ub + 1.96 * sigma / std::sqrt(forward_num);
 
         if (iter == iter_num - 1) {
             final_confidence_interval1 = -confidence_ub2;
